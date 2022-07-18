@@ -1,14 +1,17 @@
-import Billing from "./components/Billing";
-import { Desks } from "./components/Desks";
-import ProductList from "./components/ProductList";
-
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Navbar from "./components/Layout/Navbar";
+import AddProduct from "./pages/addProduct";
+import Homepage from "./pages/homePage";
 function App() {
   return (
     <div className="App">
-      <div className="grid grid-cols-3 gap-2">
-        <Billing />
-        <ProductList />
-      </div>
+      <BrowserRouter>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Homepage />} />
+          <Route path="/add" element={<AddProduct />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
