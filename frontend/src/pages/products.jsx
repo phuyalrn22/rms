@@ -1,19 +1,17 @@
 import React, { useState } from "react";
+import { useProduct } from "../contexts/Product";
 import AddProduct from "../components/Inventory/AddProduct";
 import ProductRow from "../components/Inventory/ProductRow";
 const Products = () => {
-  const [products, setProducts] = useState([]);
+  const { products, addProduct } = useProduct();
 
-  const addProduct = (product) => {
-    setProducts([...products, product]);
-    setModal(false);
-  };
   const [model, setModal] = useState(false);
 
   return (
     <div className="h-screen w-screen ">
       <input
         checked={model}
+        onChange={() => setModal(true)}
         type="checkbox"
         id="ad_product_model"
         className="modal-toggle !block "
