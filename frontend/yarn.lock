@@ -8416,6 +8416,12 @@ to-regex-range@^5.0.1:
   dependencies:
     is-number "^7.0.0"
 
+"toast@https://github.com/phuyalrn22/toast.git":
+  version "1.0.0"
+  resolved "https://github.com/phuyalrn22/toast.git#c78342f82de97fac5295e7430eb0ef7ca9b2e6e2"
+  dependencies:
+    react "^18.2.0"
+
 toidentifier@1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/toidentifier/-/toidentifier-1.0.1.tgz#3be34321a88a820ed1bd80dfaa33e479fbb8dd35"

@@ -5,7 +5,7 @@ import Order from "./Order";
 const Orders = () => {
   const { getActiveOrder: orders } = useBilling();
   const getTotalAmount = () =>
-    orders.reduce((x, y) => (x += y.price * y.quantity), 0);
+    orders ? orders.reduce((x, y) => (x += y.price * y.quantity), 0) : 0;
 
   return (
     <div className="h-[500px]">
