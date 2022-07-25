@@ -24,12 +24,11 @@ const BillingProvider = ({ children }) => {
   const getIndexes = (() => {
     return Object.keys(desks);
   })();
-  const getActiveOrder = useMemo(
-    () =>
-      desks[activeState].find((order) => order.status === 0)
+  const getActiveOrder = 
+    (() =>
+     desks[activeState].find((order) => order.status === 0)
         ? desks[activeState].find((order) => order.status === 0).orders
-        : undefined,
-    [activeState]
+        : undefined
   )();
 
   const addOrder = (productId, quantity) => {
@@ -73,7 +72,6 @@ const BillingProvider = ({ children }) => {
       setDesks(newDesks);
     }
   };
-  console.log(desks);
   return (
     <BillingContext.Provider
       value={{

@@ -1,0 +1,19 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "Api for RMS",
+  "main": "index.js",
+  "author": "Aryan Phuyal",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.1",
+    "mongoose": "^6.4.6"
+  },
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.19"
+  }
+}
