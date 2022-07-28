@@ -1,11 +1,11 @@
 const Order = require("../Modal/Order");
-const { getQuantity } = require("../service/product.service");
+const { getQuantity, updateQuantity } = require("../service/product.service");
 
 exports.getOrder = async (req, res) => {
   const { seatId } = req.params;
   const order = await Order.find({ status: false, seatId: seatId })
     .populate({
-      select: "name",
+      select: "name price",
       path: "productId",
     })
     .populate("seatId");
@@ -21,6 +21,7 @@ exports.addOrder = async (req, res) => {
       message: "Insufficient quantity",
     });
   }
+  await updateQuantity(productId, quantity);
   const order = new Order({
     status: false,
     quantity,

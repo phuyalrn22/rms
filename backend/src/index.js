@@ -1,12 +1,15 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const dotEnv = require("dotenv");
+const cors = require("cors");
 dotEnv.config();
 
 const router = require("./route");
 const { MONGO_URL, PORT } = require("../env");
 const server = express();
+server.use(cors());
 server.use(express.json());
+
 router(server);
 mongoose
   .connect(MONGO_URL)

@@ -2,6 +2,7 @@ const Product = require("../Modal/Product");
 
 exports.add = async (req, res) => {
   const { name, imageUrl, description, price, quantity } = req.body;
+
   const newProduct = new Product({
     name,
     imageUrl,
