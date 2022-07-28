@@ -1,7 +1,14 @@
 import React from "react";
 
-const Order = ({ order: { id, name, quantity, price } }) => (
-  <tr key={id}>
+const Order = ({
+  order: {
+    _id,
+    productId: { name },
+    quantity,
+    productId: { price },
+  },
+}) => (
+  <tr key={_id}>
     <td>{name}</td>
     <td>{quantity}</td>
     <td>{price}</td>
