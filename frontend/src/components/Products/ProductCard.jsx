@@ -1,14 +1,15 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import React, { useState } from "react";
 import { useBilling } from "../../contexts/Billing";
+import { withOrderHoc } from "../../hoc/orderHoc";
 
 const ProductCard = ({
-  product: { id, name, price, imageUrl, description },
+  addOrder,
+  product: { _id, name, price, imageUrl, description },
 }) => {
   const [model, setModel] = useState(false);
-  const { addOrder } = useBilling();
   return (
-    <div key={id} className="card w-96 bg-base-100 shadow-xl h-[28rem]">
+    <div key={_id} className="card w-96 bg-base-100 shadow-xl h-[28rem]">
       <input
         checked={model}
         onChange={() => setModel(false)}
@@ -28,11 +29,12 @@ const ProductCard = ({
           <Formik
             initialValues={{ quantity: 1 }}
             onSubmit={(data) => {
-              addOrder(id, data.quantity);
+              addOrder(_id, data.quantity);
             }}
           >
             {() => (
               <Form>
+                {_id}
                 <div className="form-control w-full max-w-lg">
                   <label className="label">
                     <span className="label-text-alt">Quantity</span>
@@ -77,4 +79,4 @@ const ProductCard = ({
   );
 };
 
-export default ProductCard;
+export default withOrderHoc(ProductCard);

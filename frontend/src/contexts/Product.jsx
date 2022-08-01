@@ -14,7 +14,7 @@ const ProductProvider = ({ children }) => {
   };
   const updateQuantity = (productId, quantity) => {
     const newProducts = [...products];
-    const updatedProduct = newProducts.find((p) => p.id === productId);
+    const updatedProduct = newProducts.find((p) => p._id === productId);
     updatedProduct.quantity = updatedProduct.quantity - quantity;
     setProducts(newProducts);
   };

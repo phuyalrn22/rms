@@ -29,7 +29,13 @@ exports.addOrder = async (req, res) => {
     productId,
   });
   await order.save();
-  res.json({ order });
+  const newOrder = await Order.findById(order.id)
+    .populate({
+      select: "name price",
+      path: "productId",
+    })
+    .populate("seatId");
+  res.json(newOrder);
 };
 
 exports.checkOut = async (req, res) => {

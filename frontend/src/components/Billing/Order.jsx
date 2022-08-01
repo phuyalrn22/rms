@@ -1,6 +1,7 @@
 import React from "react";
 
 const Order = ({
+  addOrder,
   order: {
     _id,
     productId: { name },
@@ -8,7 +9,7 @@ const Order = ({
     productId: { price },
   },
 }) => (
-  <tr key={_id}>
+  <tr>
     <td>{name}</td>
     <td>{quantity}</td>
     <td>{price}</td>

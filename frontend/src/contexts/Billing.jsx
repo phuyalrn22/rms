@@ -8,7 +8,12 @@ import React, {
 import { useProduct } from "./Product";
 import { v4 as uuidv4 } from "uuid";
 import { useToast } from "./Toast";
-import { getOrder, getSeat } from "../service/seat";
+import {
+  addOrder as addOrderService,
+  checkOutOrder,
+  getOrder,
+  getSeat,
+} from "../service/seat";
 const BillingContext = createContext(undefined);
 const BillingProvider = ({ children }) => {
   const { products, updateQuantity } = useProduct();
@@ -43,47 +48,23 @@ const BillingProvider = ({ children }) => {
     } catch (err) {}
   };
 
-  const addOrder = (productId, quantity) => {
-    const id = uuidv4();
-    const selectedProduct = products.find((p) => p.id === productId);
+  const addOrder = async (productId, quantity, seatId = activeState) => {
+    const selectedProduct = products.find((p) => p._id === productId);
     if (selectedProduct.quantity >= quantity) {
-      const newDesks = { ...desks };
-      // if (getActiveOrder) {
-      //   newDesks[activeState]
-      //     .find((order) => order.status === 0)
-      //     .orders.push({
-      //       id,
-      //       name: selectedProduct.name,
-      //       price: selectedProduct.price,
-      //       quantity: quantity,
-      //     });
-      // } else {
-      newDesks[activeState].push({
-        status: 0,
-        orders: [
-          {
-            id,
-            name: selectedProduct.name,
-            price: selectedProduct.price,
-            quantity: quantity,
-          },
-        ],
-      });
-      // }
-
+      const res = await addOrderService(seatId, productId, quantity);
+      const order = res.data;
+      const newOrders = [...orders];
+      newOrders.push(order);
+      setOrders(newOrders);
       updateQuantity(productId, quantity);
-      setDesks(newDesks);
     } else {
       addToast({ type: "error", message: "Out of order" });
     }
   };
 
-  const checkOut = () => {
-    const newDesks = { ...desks };
-    // if (getActiveOrder) {
-    newDesks[activeState].find((order) => order.status === 0).status = 1;
-    setDesks(newDesks);
-    // }
+  const checkOut = async () => {
+    await checkOutOrder(activeState);
+    setOrders([]);
   };
 
   return (

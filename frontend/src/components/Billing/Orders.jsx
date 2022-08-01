@@ -5,10 +5,12 @@ import Order from "./Order";
 const Orders = () => {
   const { orders } = useBilling();
   const getTotalAmount = () =>
-    orders ? orders.reduce((x, y) => (x += y.price * y.quantity), 0) : 0;
+    orders
+      ? orders.reduce((x, y) => (x += y.productId.price * y.quantity), 0)
+      : 0;
 
   return (
-    <div className="h-[500px]">
+    <div className="h-[500px] max-h-[50vh] overflow-auto">
       <table className="table w-full">
         <thead>
           <tr>
@@ -25,7 +27,7 @@ const Orders = () => {
       <hr />
       <div className="flex justify-between px-5">
         <div>Total</div>
-        <div>{getTotalAmount()}</div>
+        <div>{orders.length > 0 ? getTotalAmount() : 0}</div>
       </div>
       <hr />
     </div>
